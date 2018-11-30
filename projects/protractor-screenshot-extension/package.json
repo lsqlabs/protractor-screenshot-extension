@@ -1,0 +1,39 @@
+{
+    "name": "protractor-screenshot-extension",
+    "version": "1.0.0",
+    "license": "MIT",
+    "description": "An extension for Protractor that allows testing visual screenshots",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/lsqlabs/protractor-screenshot-extension.git"
+    },
+    "author": {
+        "name": "lsqlabs",
+        "email": "developers@lsq.com"
+    },
+    "keywords": [
+        "protractor",
+        "angular",
+        "ng",
+        "screenshot",
+        "test",
+        "integration",
+        "image",
+        "image-diff",
+        "image-comparison",
+        "pixelmatch",
+        "diff"
+    ],
+    "bugs": {
+        "url": "https://github.com/lsqlabs/protractor-screenshot-extension/issues"
+    },
+    "homepage": "https://github.com/lsqlabs/protractor-screenshot-extension",
+    "peerDependencies": {
+        "protractor": "^5.0.0"
+    },
+    "devDependencies": {
+        "pixelmatch": "4.0.2",
+        "pngjs": "3.3.3",
+        "shelljs": "0.8.3"
+    }
+}
