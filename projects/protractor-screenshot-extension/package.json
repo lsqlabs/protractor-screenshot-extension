@@ -1,6 +1,6 @@
 {
     "name": "protractor-screenshot-extension",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "license": "MIT",
     "description": "An extension for Protractor that allows testing visual screenshots",
     "repository": {
@@ -31,7 +31,7 @@
     "peerDependencies": {
         "protractor": "^5.0.0"
     },
-    "devDependencies": {
+    "dependencies": {
         "pixelmatch": "4.0.2",
         "pngjs": "3.3.3",
         "shelljs": "0.8.3"

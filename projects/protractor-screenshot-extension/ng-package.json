@@ -3,5 +3,6 @@
     "dest": "../../dist/protractor-screenshot-extension",
     "lib": {
         "entryFile": "src/public_api.ts"
-    }
+    },
+    "whitelistedNonPeerDependencies": ["pixelmatch", "pngjs", "shelljs"]
 }
