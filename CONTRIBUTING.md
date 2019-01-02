@@ -1,18 +1,16 @@
 # Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue,
-email, or any other method with the owners of this repository before making a change.
+email, or any other method with the owners of this repository before making a change. 
 
-This project was built using [Angular CLI](https://angular.io/cli). While the built `rxjs-uploader` library does not depend on Angular, this project does.
-
-Please note we have a code of conduct. Please follow it in all of your interactions with the project.
+Please note we have a code of conduct, please follow it in all of your interactions with the project.
 
 ## Pull Request Process
 
-1. Ensure any install or build dependencies are in the proper dependency object in the `package.json` file. Additionally, if new peer dependencies have been introduced, add them to `projects/rxjs-uploader/package.json`.
-2. Update the README.md with any changes to the public API.
-3. Increase the version numbers in `package.json` and `projects/rxjs-uploader/package.json` and the README.md to the new version that this Pull Request would represent. The versioning scheme we use is [SemVer](http://semver.org/).
-4. Run the test suite (`npm test`) to ensure unit tests are still passing. Add unit tests for your added logic as appropriate.
+1. Ensure any install or build dependencies are in the proper dependency object in the `package.json` file.
+2. Update the README.md with any potential changes to the interface.
+3. Increase the version numbers in `package.json` and the README.md to the new version that this Pull Request would represent. The versioning scheme we use is [SemVer](http://semver.org/).
+4. If any unit tests exist, run the test suite to ensure they are still passing. Add unit tests for your added logic as appropriate.
 4. You may merge the Pull Request in once you have the sign-off of two other developers, or if you do not have permission to do that, you may request the second reviewer to merge it for you.
 
 ## Style Guide
@@ -22,10 +20,10 @@ Please conform to our `tslint` and `.stylelintrc` files in order to maintain a c
 ## How to Build
 
 ### Module
-To build the core module, simply run `npm run build` in the root of this repository. This will build the module locally to the `dist` folder. The contents of `dist` are what eventually gets published to the npm registry.
+To build the core module, simply run `npm run build` in the root of this repository. This will build the module locally to the `build` folder. The contents of `build/package` are what eventually gets published to the npm registry.
 
 ### Demo application
-Run `npm start` to run the demo application. While running, any changes to either the demo app or the library will trigger a reload, and you'll see your changes live.
+To see the demo application, switch to the `gh-pages` branch. You can run the application at `http://localhost:4200/` by running `npm start`. Simply replace the appropriate module inside `node_modules` with your built module in order to test your modifications prior to submitting your PR.
 
 ## Code of Conduct
 
