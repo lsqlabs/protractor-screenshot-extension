@@ -119,8 +119,9 @@ export class ProtractorScreenshotExtension {
                     }
                     const ignoreLocation = await ignoreElement.getLocation();
                     const ignoreSize = await ignoreElement.getSize();
-                    // Adjust coordinates, as the screenshot is twice the resolution of the viewport.
-                    const conversionFactor = 2;
+                    // Adjust coordinates, as the screenshot can be twice the viewport size for high resolution displays.
+                    const parentSize = await parentElement.getSize();
+                    const conversionFactor = imagePng.width / parentSize.width;
                     this._blackoutRectangle(
                         imagePng,
                         (ignoreLocation.x - parentLocation.x) * conversionFactor,
