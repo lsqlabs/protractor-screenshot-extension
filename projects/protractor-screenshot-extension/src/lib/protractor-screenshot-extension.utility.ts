@@ -80,9 +80,17 @@ export class ProtractorScreenshotExtension {
         return this.checkElementScreenshot(browser, tag, options);
     }
 
-    private _blackoutRectangle(image: PNG, x: number, y: number, w: number, h: number): void {
+    private _blackoutRectangle(
+        image: PNG,
+        ignoreX: number,
+        ignoreY: number,
+        ignoreW: number,
+        ignoreH: number,
+        parentW: number,
+        parentH: number,
+    ): void {
         // Create a black image that will be used for blacking out regions to be ignored.
-        const blackPng = new PNG({ width: w, height: h });
+        const blackPng = new PNG({ width: ignoreW, height: ignoreH });
         for (let i = 0; i < blackPng.height; i++) {
             for (let j = 0; j < blackPng.width; j++) {
                 const idx = (blackPng.width * i + j) * 4;
@@ -93,7 +101,31 @@ export class ProtractorScreenshotExtension {
             }
         }
 
-        blackPng.bitblt(image, 0, 0, w, h, x, y);
+        // Math to ensure bitBlt() does not try to blacken an area out of frame.
+        if (ignoreX < 0) {
+            ignoreW += ignoreX;
+            ignoreX = 0;
+        }
+        if (ignoreX > parentW) {
+            ignoreW = 0;
+            ignoreX = parentW;
+        }
+        if (ignoreY < 0) {
+            ignoreH += ignoreY;
+            ignoreY = 0;
+        }
+        if (ignoreY > parentH) {
+            ignoreH = 0;
+            ignoreY = parentH;
+        }
+        if (ignoreX + ignoreW > parentW) {
+            ignoreW = parentW - ignoreX;
+        }
+        if (ignoreY + ignoreH > parentH) {
+            ignoreH = parentH - ignoreY;
+        }
+
+        blackPng.bitblt(image, 0, 0, ignoreW, ignoreH, ignoreX, ignoreY);
     }
 
     private async _addBlackoutRectangles (
@@ -103,10 +135,14 @@ export class ProtractorScreenshotExtension {
     ): Promise<Buffer> {
         if (options && (options.ignoreRectangles || options.ignoreElements)) {
             const imagePng = PNG.sync.read(imageBuffer);
+            const parentSize = parentElement.driver
+                ? await parentElement.driver.manage().window().getSize()
+                : await parentElement.getSize();
+            const conversionFactor = imagePng.width / parentSize.width;
 
             if (options.ignoreRectangles && options.ignoreRectangles.length) {
                 options.ignoreRectangles.forEach((rect) => {
-                    this._blackoutRectangle(imagePng, rect.x, rect.y, rect.w, rect.h);
+                    this._blackoutRectangle(imagePng, rect.x, rect.y, rect.w, rect.h, parentSize.width, parentSize.height);
                 });
             }
             if (options.ignoreElements && options.ignoreElements.length) {
@@ -120,15 +156,14 @@ export class ProtractorScreenshotExtension {
                     const ignoreLocation = await ignoreElement.getLocation();
                     const ignoreSize = await ignoreElement.getSize();
                     // Adjust coordinates, as the screenshot can be twice the viewport size for high resolution displays.
-                    const parentSize = parentElement.driver 
-                        ? await parentElement.driver.manage().window().getSize() 
-                        : await parentElement.getSize();
-                    const conversionFactor = imagePng.width / parentSize.width;
                     this._blackoutRectangle(
                         imagePng,
                         (ignoreLocation.x - parentLocation.x) * conversionFactor,
                         (ignoreLocation.y - parentLocation.y) * conversionFactor,
-                        ignoreSize.width * conversionFactor, ignoreSize.height * conversionFactor
+                        ignoreSize.width * conversionFactor,
+                        ignoreSize.height * conversionFactor,
+                        parentSize.width,
+                        parentSize.height
                     );
                 }));
             }
