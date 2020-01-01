@@ -1,0 +1,30 @@
+name: Publish to NPM
+
+on: 
+  push:
+    branches:
+    - master
+
+jobs:
+  npm-publish:
+    name: Publish package to npm
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks out this repository's code.
+    - uses: actions/checkout@v1
+
+      # Sets up the node environment.
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+
+      # 
+    - name: Publish package to npm (tag with beta) # Beta tagging just for testing
+      run: |
+        npm install
+        npm run build
+        cp README.md dist/protractor-screenshot-extension/README.md
+        cd dist/protractor-screenshot-extension 
+        npm publish --tag beta
