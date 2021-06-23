@@ -1,7 +1,13 @@
 {
     "name": "protractor-screenshot-extension-app",
     "version": "0.0.0",
+    "resolutions": {
+        "normalize-url": "6.1.0",
+        "lodash": "4.17.21",
+        "serialize-javascript": "6.0.0"
+    },
     "scripts": {
+        "preinstall": "npx npm-force-resolutions",
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build",
@@ -22,6 +28,7 @@
         "@angular/platform-browser-dynamic": "8.0.3",
         "@angular/router": "8.0.3",
         "core-js": "2.5.7",
+        "lodash": "4.17.21",
         "rxjs": "6.3.3",
         "zone.js": "0.8.26"
     },
@@ -37,7 +44,7 @@
         "codelyzer": "4.5.0",
         "jasmine-core": "2.99.1",
         "jasmine-spec-reporter": "4.2.1",
-        "karma": "4.1.0",
+        "karma": "6.3.4",
         "karma-chrome-launcher": "2.2.0",
         "karma-coverage-istanbul-reporter": "2.0.4",
         "karma-jasmine": "1.1.2",
@@ -52,6 +59,8 @@
         "tsickle": "0.34.0",
         "tslib": "1.9.3",
         "tslint": "5.11.0",
-        "typescript": "3.4.5"
+        "typescript": "3.4.5",
+        "normalize-url": "6.1.0",
+        "serialize-javascript": "6.0.0"
     }
 }
