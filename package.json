@@ -54,7 +54,7 @@
         "pngjs": "3.3.3",
         "protractor": "5.4.1",
         "rimraf": "2.6.2",
-        "shelljs": "0.8.3",
+        "shelljs": "0.8.5",
         "ts-node": "7.0.1",
         "tsickle": "0.34.0",
         "tslib": "1.9.3",
