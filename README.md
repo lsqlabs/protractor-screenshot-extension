@@ -6,6 +6,12 @@ A simple, light-weight extension for Protractor (Angular's integration testing t
 npm install protractor-screenshot-extension --save-dev
 ```
 
+## Publishing Updates to npm
+1. Make sure you are logged in via cli to the npm account that owns the package (if you work at LSQ Funding, check the 1Password vault).
+2. Increment the version number in [projects/protractor-screenshot-extension/package.json](https://github.com/lsqlabs/protractor-screenshot-extension/blob/master/projects/protractor-screenshot-extension/package.json) appropriately.
+2. `npm run build:lib`
+3. `npm run publish`
+
 ## Usage and Interfaces
 In order to add this extension to your Protractor browser instance, you can add the following few lines to your `protractor.conf.js` file.
 ```js
